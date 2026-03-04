@@ -27,7 +27,7 @@ metadata:
 type: Opaque
 data:
   # Replace with your base64-encoded values
-  MONGODB_URI: bW9uZ29kYitzcnY6Ly91c2VyOnBhc3NAY2x1c3Rlci5tb25nb2RiLm5ldC8= # placeholder
-  AWS_ACCESS_KEY_ID: eW91ci1hY2Nlc3Mta2V5LWlk # placeholder
-  AWS_SECRET_ACCESS_KEY: eW91ci1zZWNyZXQtYWNjZXNzLWtleQ== # placeholder
+  MONGODB_URI: REPLACE_WITH_BASE64_URI
+  AWS_ACCESS_KEY_ID: REPLACE_WITH_BASE64_ID
+  AWS_SECRET_ACCESS_KEY: REPLACE_WITH_BASE64_SECRET
   MLFLOW_TRACKING_URI: aHR0cDovL21sZmxvdy1zZXJ2aWNlOjUwMDA= # http://mlflow-service:5000

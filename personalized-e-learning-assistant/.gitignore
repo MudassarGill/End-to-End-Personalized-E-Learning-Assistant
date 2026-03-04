@@ -19,5 +19,6 @@ frontend/node_modules/
 # OS
 .DS_Store
 Thumbs.db
-/data
-setup.py
+.idea/
+.vscode/
+*.log
