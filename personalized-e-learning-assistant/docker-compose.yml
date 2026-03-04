@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: elearning-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017
+      - DATABASE_NAME=elearning_db
+    depends_on:
+      - mongo
+    volumes:
+      - ./ml_models:/app/ml_models
+
+  frontend:
+    build: ./frontend
+    container_name: elearning-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000/api
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:7.0
+    container_name: elearning-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

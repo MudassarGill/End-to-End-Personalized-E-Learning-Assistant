@@ -1,0 +1,213 @@
+/* App Styles */
+:root {
+  --primary: #6c5ce7;
+  --primary-light: #a29bfe;
+  --secondary: #00cec9;
+  --bg-dark: #0a0a1a;
+  --bg-card: #1a1a2e;
+  --text-primary: #ffffff;
+  --text-secondary: #b2b2d0;
+  --success: #00b894;
+  --danger: #e17055;
+  --border-radius: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.app-header p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--primary-light);
+  font-size: 1.2rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Card base style */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  border: 1px solid rgba(108, 92, 231, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(108, 92, 231, 0.15);
+}
+
+.card h2 {
+  color: var(--primary-light);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+/* Upload form */
+.upload-form {
+  text-align: center;
+}
+
+.upload-area {
+  border: 2px dashed var(--primary);
+  border-radius: var(--border-radius);
+  padding: 3rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.upload-area:hover {
+  background: rgba(108, 92, 231, 0.1);
+}
+
+.upload-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: opacity 0.2s;
+}
+
+.upload-btn:hover {
+  opacity: 0.9;
+}
+
+.upload-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Keywords */
+.keywords-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.keyword-tag {
+  background: rgba(108, 92, 231, 0.2);
+  color: var(--primary-light);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+/* Quiz */
+.quiz-question {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-left: 3px solid var(--primary);
+}
+
+.quiz-options {
+  list-style: none;
+  padding: 0;
+}
+
+.quiz-options li {
+  padding: 0.5rem 1rem;
+  margin: 0.3rem 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.quiz-options li:hover {
+  background: rgba(108, 92, 231, 0.15);
+}
+
+.quiz-options li.selected {
+  background: rgba(108, 92, 231, 0.3);
+  border: 1px solid var(--primary);
+}
+
+.quiz-options li.correct {
+  background: rgba(0, 184, 148, 0.2);
+  border: 1px solid var(--success);
+}
+
+.quiz-options li.incorrect {
+  background: rgba(225, 112, 85, 0.2);
+  border: 1px solid var(--danger);
+}
+
+/* Progress dashboard */
+.progress-bar {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 10px;
+  margin: 0.5rem 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .App {
+    padding: 1rem;
+  }
+  .app-header h1 {
+    font-size: 1.8rem;
+  }
+}
