@@ -24,11 +24,27 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "500m"
-          env:
-            - name: MONGO_URL
-              value: "mongodb://mongo-service:27017"
-            - name: DATABASE_NAME
-              value: "elearning_db"
+          envFrom:
+            - configMapRef:
+                name: elearning-config
+            - secretRef:
+                name: elearning-secrets
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
 ---
 apiVersion: v1
 kind: Service
@@ -68,6 +84,18 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "250m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
 ---
 apiVersion: v1
 kind: Service
@@ -110,6 +138,22 @@ spec:
           volumeMounts:
             - name: mongo-storage
               mountPath: /data/db
+          livenessProbe:
+            exec:
+              command:
+                - mongosh
+                - --eval
+                - "db.adminCommand('ping')"
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            exec:
+              command:
+                - mongosh
+                - --eval
+                - "db.adminCommand('ping')"
+            initialDelaySeconds: 10
+            periodSeconds: 10
       volumes:
         - name: mongo-storage
           persistentVolumeClaim:

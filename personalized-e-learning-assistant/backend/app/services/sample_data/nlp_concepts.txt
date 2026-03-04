@@ -1,0 +1,22 @@
+Natural Language Processing (NLP)
+=================================
+Text Preprocessing:
+  - Tokenization: Breaking text into words/sentences
+  - Stop word removal, Stemming, Lemmatization
+  - TF-IDF: Term Frequency-Inverse Document Frequency
+
+Word Embeddings:
+  - Word2Vec (CBOW, Skip-gram)
+  - GloVe, FastText
+
+NLP Tasks:
+  - Sentiment Analysis: Determining opinion polarity
+  - Named Entity Recognition (NER): Identifying entities
+  - Machine Translation: Converting between languages
+  - Text Summarization: Extractive vs Abstractive
+  - Question Answering: Finding answers in text
+
+Modern NLP Models:
+  - BERT: Bidirectional Encoder Representations
+  - GPT: Generative Pre-trained Transformer
+  - T5: Text-to-Text Transfer Transformer

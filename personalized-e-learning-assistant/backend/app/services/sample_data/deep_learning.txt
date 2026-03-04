@@ -1,0 +1,20 @@
+Deep Learning Concepts
+======================
+Neural Networks: Inspired by the human brain.
+  - Input layer: Receives the data
+  - Hidden layers: Process the information
+  - Output layer: Produces the result
+  - Activation Functions: ReLU, Sigmoid, Tanh, Softmax
+
+CNNs: Specialized for image processing.
+  - Convolution layers extract features using filters
+  - Pooling layers reduce dimensionality
+
+RNNs: Designed for sequential data.
+  - LSTM: Long Short-Term Memory (solves vanishing gradient)
+  - GRU: Gated Recurrent Units
+
+Transformers: Modern architecture for NLP.
+  - Self-attention mechanism
+  - Multi-head attention
+  - Examples: BERT, GPT, T5

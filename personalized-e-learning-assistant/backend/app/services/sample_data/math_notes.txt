@@ -1,0 +1,17 @@
+Mathematics - Key Formulas
+===========================
+Algebra:
+  - Quadratic Formula: x = (-b +/- sqrt(b^2 - 4ac)) / 2a
+  - Factoring: x^2 + 5x + 6 = (x+2)(x+3)
+  - Laws of Exponents: a^m * a^n = a^(m+n)
+
+Geometry:
+  - Triangle Area: (1/2) * base * height
+  - Circle Area: pi * r^2
+  - Pythagoras: a^2 + b^2 = c^2
+
+Trigonometry:
+  - sin(theta) = opposite / hypotenuse
+  - cos(theta) = adjacent / hypotenuse
+  - tan(theta) = opposite / adjacent
+  - sin^2(theta) + cos^2(theta) = 1

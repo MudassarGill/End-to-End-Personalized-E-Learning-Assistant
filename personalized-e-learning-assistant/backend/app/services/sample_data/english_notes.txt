@@ -1,0 +1,21 @@
+English Grammar Notes
+=====================
+Parts of Speech:
+  - Noun: person, place, thing (Ali, Lahore, book)
+  - Verb: action word (run, study, write)
+  - Adjective: describes noun (beautiful, tall)
+  - Adverb: describes verb (quickly, slowly)
+
+Tenses:
+  - Present Simple: I study every day
+  - Past Simple: I studied yesterday
+  - Future Simple: I will study tomorrow
+  - Present Perfect: I have studied
+
+Active/Passive Voice:
+  - Active: The teacher teaches students
+  - Passive: Students are taught by the teacher
+
+Direct/Indirect Speech:
+  - Direct: He said, "I am going."
+  - Indirect: He said that he was going.

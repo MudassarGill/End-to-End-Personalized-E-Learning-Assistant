@@ -1,0 +1,17 @@
+
+            Deep Learning Concepts
+            
+            Convolutional Neural Networks (CNNs): Specialized for processing grid-like data (images).
+            - Convolution layers: Extract features
+            - Pooling layers: Reduce dimensionality
+            - Fully connected layers: Make predictions
+            
+            Recurrent Neural Networks (RNNs): Designed for sequential data (text, time series).
+            - LSTM: Long Short-Term Memory networks
+            - GRU: Gated Recurrent Units
+            
+            Transformers: Modern architecture for NLP tasks.
+            - Self-attention mechanism
+            - Positional encoding
+            - Multi-head attention
+            

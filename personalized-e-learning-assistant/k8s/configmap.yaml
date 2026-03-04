@@ -1,0 +1,33 @@
+# ═══════════════════════════════════════════════
+#  K8s ConfigMap — Non-Sensitive Configuration
+# ═══════════════════════════════════════════════
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elearning-config
+data:
+  MONGODB_DB: "elearning_db"
+  BACKEND_HOST: "0.0.0.0"
+  BACKEND_PORT: "8000"
+  AWS_REGION: "us-east-1"
+  AWS_S3_BUCKET: "elearning-uploads"
+  MLFLOW_EXPERIMENT_NAME: "elearning-nlp"
+  REACT_APP_API_URL: "http://elearning.example.com/api"
+
+---
+# ═══════════════════════════════════════════════
+#  K8s Secret — Sensitive Credentials
+#  Values must be base64 encoded:
+#    echo -n "your-value" | base64
+# ═══════════════════════════════════════════════
+apiVersion: v1
+kind: Secret
+metadata:
+  name: elearning-secrets
+type: Opaque
+data:
+  # Replace with your base64-encoded values
+  MONGODB_URI: bW9uZ29kYitzcnY6Ly91c2VyOnBhc3NAY2x1c3Rlci5tb25nb2RiLm5ldC8= # placeholder
+  AWS_ACCESS_KEY_ID: eW91ci1hY2Nlc3Mta2V5LWlk # placeholder
+  AWS_SECRET_ACCESS_KEY: eW91ci1zZWNyZXQtYWNjZXNzLWtleQ== # placeholder
+  MLFLOW_TRACKING_URI: aHR0cDovL21sZmxvdy1zZXJ2aWNlOjUwMDA= # http://mlflow-service:5000

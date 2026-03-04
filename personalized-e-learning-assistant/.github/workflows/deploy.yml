@@ -1,0 +1,82 @@
+name: Deploy Pipeline
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  DOCKER_REGISTRY: ghcr.io
+  IMAGE_PREFIX: ${{ github.repository_owner }}/elearning
+
+jobs:
+  # ─── Build & Push Docker Images ───
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & push backend image
+        run: |
+          docker build \
+            -t ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_PREFIX }}-backend:latest \
+            -t ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_PREFIX }}-backend:${{ github.sha }} \
+            personalized-e-learning-assistant/backend
+          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_PREFIX }}-backend --all-tags
+
+      - name: Build & push frontend image
+        run: |
+          docker build \
+            -t ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_PREFIX }}-frontend:latest \
+            -t ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_PREFIX }}-frontend:${{ github.sha }} \
+            personalized-e-learning-assistant/frontend
+          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_PREFIX }}-frontend --all-tags
+
+  # ─── Deploy to Kubernetes ───
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: "latest"
+
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
+
+      - name: Apply Kubernetes manifests
+        run: |
+          cd personalized-e-learning-assistant/k8s
+          kubectl apply -f configmap.yaml
+          kubectl apply -f deployment.yaml
+          kubectl apply -f ingress.yaml
+
+      - name: Update image tags
+        run: |
+          kubectl set image deployment/elearning-backend \
+            backend=${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_PREFIX }}-backend:${{ github.sha }}
+          kubectl set image deployment/elearning-frontend \
+            frontend=${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_PREFIX }}-frontend:${{ github.sha }}
+
+      - name: Verify rollout
+        run: |
+          kubectl rollout status deployment/elearning-backend --timeout=120s
+          kubectl rollout status deployment/elearning-frontend --timeout=120s

@@ -1,0 +1,26 @@
+Python Programming Basics
+=========================
+Data Types: int, float, str, bool, list, tuple, dict, set
+
+Control Flow:
+  - if/elif/else for conditional logic
+  - for loops for iteration
+  - while loops for conditional iteration
+
+Functions:
+  - def keyword for definition
+  - *args and **kwargs for variable arguments
+  - Lambda functions: anonymous single-expression functions
+
+Object-Oriented Programming:
+  - Classes and Objects
+  - Inheritance, Polymorphism, Encapsulation
+  - Magic methods: __init__, __str__, __repr__
+
+File Handling:
+  - open(), read(), write(), close()
+  - Context managers: with statement
+
+Popular Libraries:
+  - NumPy, Pandas, Matplotlib
+  - Scikit-learn, TensorFlow, PyTorch

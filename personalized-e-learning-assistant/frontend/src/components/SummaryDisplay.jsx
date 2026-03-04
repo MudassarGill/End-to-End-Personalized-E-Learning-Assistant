@@ -1,19 +1,70 @@
-import React from 'react';
+import React, { useState } from "react";
 
-function SummaryDisplay({ summary, keywords }) {
+export default function SummaryDisplay({ summary, keywords }) {
+    const [expanded, setExpanded] = useState(false);
+
+    if (!summary && (!keywords || keywords.length === 0)) return null;
+
     return (
-        <div className="card">
-            <h2>📝 Summary</h2>
-            <p style={{ lineHeight: '1.8', color: '#b2b2d0' }}>{summary}</p>
+        <div className="results-grid">
+            {/* Summary Card */}
+            {summary && (
+                <div className="card summary-card glass-card">
+                    <div className="card-accent-bg"></div>
+                    <div className="card-header-row">
+                        <span className="card-header-icon">📝</span>
+                        <h2>Summary</h2>
+                    </div>
+                    <div className="summary-meta">
+                        <span className="meta-badge">
+                            {summary.split(/\s+/).length} words
+                        </span>
+                        <span className="meta-badge">
+                            {summary.length} chars
+                        </span>
+                    </div>
+                    <div className="summary-text">
+                        {expanded || summary.length <= 300
+                            ? summary
+                            : summary.slice(0, 300) + "..."}
+                    </div>
+                    {summary.length > 300 && (
+                        <button
+                            className="btn-link"
+                            onClick={() => setExpanded(!expanded)}
+                        >
+                            {expanded ? "Show Less ▲" : "Read More ▼"}
+                        </button>
+                    )}
+                </div>
+            )}
 
-            <h2 style={{ marginTop: '1.5rem' }}>🔑 Keywords</h2>
-            <div className="keywords-list">
-                {keywords && keywords.map((kw, index) => (
-                    <span key={index} className="keyword-tag">{kw}</span>
-                ))}
-            </div>
+            {/* Keywords Card */}
+            {keywords && keywords.length > 0 && (
+                <div className="card keywords-card glass-card">
+                    <div className="card-accent-bg keywords-accent"></div>
+                    <div className="card-header-row">
+                        <span className="card-header-icon">🔑</span>
+                        <h2>Keywords</h2>
+                    </div>
+                    <div className="summary-meta">
+                        <span className="meta-badge">
+                            {keywords.length} extracted
+                        </span>
+                    </div>
+                    <div className="keywords-list">
+                        {keywords.map((kw, i) => (
+                            <span
+                                key={i}
+                                className="keyword-tag animate-in"
+                                style={{ animationDelay: `${i * 0.06}s` }}
+                            >
+                                {kw}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
-
-export default SummaryDisplay;
